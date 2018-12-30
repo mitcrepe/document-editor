@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Field } from '../field';
 import { FieldType } from '../fieldType';
-import { FieldStatus } from '../fieldStatus';
+import { FieldState } from '../fieldState';
 
 @Component({
   selector: 'app-field-table-row',

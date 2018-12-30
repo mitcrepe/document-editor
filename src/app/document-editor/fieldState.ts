@@ -1,4 +1,4 @@
-export enum FieldStatus {
+export enum FieldState {
     OK,
     Warning,
     NotRecognized

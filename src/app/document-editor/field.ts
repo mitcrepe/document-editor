@@ -1,5 +1,5 @@
 import { FieldType } from './fieldType';
-import { FieldStatus } from './fieldStatus';
+import { FieldState } from './fieldState';
 import { Rectangle } from './rectangle';
 
 export class Field {
@@ -10,7 +10,7 @@ export class Field {
     public foundValues: string[];
     public value: string;
     public rectangle: Rectangle;
-    public status: FieldStatus;
+    public state: FieldState;
 
     constructor() { }
 }

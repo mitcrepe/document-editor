@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Field } from '../field';
 import { FieldType } from '../fieldType';
-import { FieldStatus } from '../fieldStatus';
+import { FieldState } from '../fieldState';
 import {FormControl} from '@angular/forms';
 
 @Component({
@@ -23,14 +23,39 @@ export class FieldsTableComponent implements OnInit {
     return field.rectangle != null;
   }
 
+  getValueInputType(field: Field): string {
+    let fieldType: string;
+    switch (field.type) {
+      case FieldType.Amount:
+        fieldType = "number";
+        break;
+      case FieldType.Date:
+        // fieldType = "date";
+        // break;
+      case FieldType.Standard:
+      default:
+      fieldType = "text";
+        break;
+    }
+
+    return fieldType;
+  }
+
+  setFieldValue(field: Field, value: string) {
+    //validate
+    field.value = value;
+  }
+
+  makeFieldValid(field: Field) {
+    field.state = FieldState.OK;
+  }
+
   onRowClicked(field: Field){
     this.selectedField = field;
   }
 
   onValueSubmit(value: string){
-    //validate
-    this.selectedField.value = value;
-
+    this.setFieldValue(this.selectedField, value);
     this.selectedField = null;
   }
 
@@ -38,11 +63,8 @@ export class FieldsTableComponent implements OnInit {
     
   }
 
-  /////
-
-  myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
-  
-  /////
+  onStateClicked(field: Field){
+    this.makeFieldValid(field);
+  }
   
 }

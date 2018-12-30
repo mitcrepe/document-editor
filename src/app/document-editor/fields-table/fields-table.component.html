@@ -1,19 +1,19 @@
 <table>
-    <th>Status</th>
+    <th>State</th>
     <th>Field</th> 
     <th>Value</th>
-    <th>Found</th>
-    <tr *ngFor="let field of fields" (click)="onRowClicked(field)">
-        <div [ngSwitch]="field.status">
-            <td *ngSwitchCase="0" class="status-column">OKImg</td>
-            <td *ngSwitchCase="1" class="status-column">WrnImg</td>
-            <td *ngSwitchCase="2" class="status-column">ErrImg</td>
-            <td *ngSwitchDefault class="status-column">WTF</td>
-        </div>
+    <th></th>
+    <tr *ngFor="let field of fields" (click)="onRowClicked(field)" [ngClass]="{'highlight': field === selectedField}">
+       
+        <td class="state-column" *ngIf="field.state == 0"><img (click)="onStateClicked(field)" src="assets/images/check24.png" alt="Ok"></td>
+        <td class="state-column" *ngIf="field.state == 1"><img (click)="onStateClicked(field)" src="assets/images/warning24.png" alt="Warn"></td>
+        <td class="state-column" *ngIf="field.state == 2"><img (click)="onStateClicked(field)" src="assets/images/error24.png" alt="Err"></td>
+
         <td class="name-column">{{field.name}}</td>
-        <td *ngIf="selectedField === field" class="value-column">
-            <mat-form-field class="example-full-width">
-                <input #box (keyup.enter)="onValueSubmit(box.value)" value="{{field.value}}" type="text" aria-label="Number" matInput [matAutocomplete]="auto">
+
+        <td class="value-column">
+            <mat-form-field>
+                <input #box (keyup.enter)="onValueSubmit(box.value)" value="{{field.value}}" type="{{getValueInputType(field)}}" aria-label="Number" matInput [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete" (closed)="onSelectionClosed()">
                 <mat-option *ngFor="let foundValue of field.foundValues" [value]="foundValue">
                     {{foundValue}}
@@ -21,8 +21,9 @@
                 </mat-autocomplete>
             </mat-form-field>            
         </td>
-        <td *ngIf="selectedField != field" class="value-column">{{field.value}}</td>
-        <td *ngIf="fieldHasRectangle(field)">RECT</td>
+
+        <td *ngIf="fieldHasRectangle(field)"><img src="assets/images/document24.png" alt="found"></td>
+        <td *ngIf="!fieldHasRectangle(field)"></td>
     </tr>
 </table>
   
