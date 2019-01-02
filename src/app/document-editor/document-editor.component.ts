@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, getModuleFactory, ViewChild } from '@angular/core';
 import { Field } from '../document-editor/field';
 import { FieldType } from './fieldType';
 import { FieldState } from './fieldState';
 import { Rectangle } from './rectangle';
 import { Point } from './point';
 import { Size } from './size';
+import { FieldsTableComponent } from './fields-table/fields-table.component';
 
 @Component({
   selector: 'app-document-editor',
@@ -12,12 +13,30 @@ import { Size } from './size';
   styleUrls: ['./document-editor.component.scss']
 })
 export class DocumentEditorComponent implements OnInit {
+  @ViewChild(FieldsTableComponent)
+  private tableComponent: FieldsTableComponent;
+  
   fields: Field[];
 
   constructor() { }
   
   ngOnInit() {
-    this.fields = [];
+    this.fields = this.getMockFields();    
+    this.fields = this.fields.concat(this.getMockFields());
+    // this.fields = this.fields.concat(this.getMockFields());
+    // this.fields = this.fields.concat(this.getMockFields());
+    // this.fields = this.fields.concat(this.getMockFields());
+    // this.fields = this.fields.concat(this.getMockFields());
+  }
+
+  onVerifyClick(field: Field) {
+    this.tableComponent.verifySelectedField();
+    this.tableComponent.selectNextField();
+  }
+
+
+  getMockFields(): Field[] {
+    let fields: Field[] = [];
 
     let invoiceNumber: Field = new Field();
     invoiceNumber.id = "1";
@@ -27,7 +46,7 @@ export class DocumentEditorComponent implements OnInit {
     invoiceNumber.state = FieldState.OK;
     invoiceNumber.foundValues = ["12345", "1234s", "i23s"];
     invoiceNumber.rectangle = new Rectangle(new Point(50, 60), new Size(30,10));
-    this.fields.push(invoiceNumber);
+    fields.push(invoiceNumber);
 
     let invoiceDate: Field = new Field();
     invoiceDate.id = "2";
@@ -36,7 +55,7 @@ export class DocumentEditorComponent implements OnInit {
     invoiceDate.foundValues = ["2018-12-31", "2018-12-30", "2018-12-29"];
     invoiceDate.type = FieldType.Date;
     invoiceDate.state = FieldState.NotRecognized;
-    this.fields.push(invoiceDate);
+    fields.push(invoiceDate);
 
     let totalAmount: Field = new Field();
     totalAmount.id = "3";
@@ -45,7 +64,16 @@ export class DocumentEditorComponent implements OnInit {
     totalAmount.type = FieldType.Amount;
     totalAmount.foundValues = ["50.01", "100.5", "250"];
     totalAmount.state = FieldState.Warning;
-    this.fields.push(totalAmount);
+    fields.push(totalAmount);
+
+    let vatAmount: Field = new Field();
+    vatAmount.id = "4";
+    vatAmount.name = "VAT amount";
+    vatAmount.type = FieldType.Amount;
+    vatAmount.state = FieldState.Warning;
+    fields.push(vatAmount);
+
+    return fields;
   }
 
 }

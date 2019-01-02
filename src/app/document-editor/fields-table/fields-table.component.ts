@@ -46,8 +46,27 @@ export class FieldsTableComponent implements OnInit {
     field.value = value;
   }
 
-  makeFieldValid(field: Field) {
+  verifySelectedField() {
+    if (this.selectedField != null) {
+      this.verifyField(this.selectedField);
+    }
+  }
+
+  verifyField(field: Field) {
     field.state = FieldState.OK;
+  }
+
+  getSelectedField(): Field {
+    return this.selectedField;
+  }
+
+  selectNextField() {
+    let index = this.fields.indexOf(this.selectedField);
+    if(index >= 0 && index < this.fields.length - 1) {
+      this.selectedField = this.fields[index + 1]
+    } else {
+      this.selectedField = null;
+    }
   }
 
   onRowClicked(field: Field){
@@ -64,7 +83,7 @@ export class FieldsTableComponent implements OnInit {
   }
 
   onStateClicked(field: Field){
-    this.makeFieldValid(field);
+    this.verifyField(field);
   }
   
 }

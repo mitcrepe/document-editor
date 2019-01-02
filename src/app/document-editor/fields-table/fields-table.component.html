@@ -1,8 +1,10 @@
 <table>
-    <th>State</th>
-    <th>Field</th> 
-    <th>Value</th>
-    <th></th>
+    <tr class="header">
+        <th>State</th>
+        <th>Field</th> 
+        <th>Value</th>
+        <th></th>
+    </tr>
     <tr *ngFor="let field of fields" (click)="onRowClicked(field)" [ngClass]="{'highlight': field === selectedField}">
        
         <td class="state-column" *ngIf="field.state == 0"><img (click)="onStateClicked(field)" src="assets/images/check24.png" alt="Ok"></td>

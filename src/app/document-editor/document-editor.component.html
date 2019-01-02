@@ -1,1 +1,35 @@
-<app-fields-table [fields]="fields"></app-fields-table>
+<div class="navbar mat-elevation-z4">
+    <button id="options-button" mat-button [matMenuTriggerFor]="menu">Options</button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>Close</button>
+        <button mat-menu-item>Delete</button>
+        <button mat-menu-item>Move to inbox</button>
+        <button mat-menu-item [matMenuTriggerFor]="rotateOptions">Rotate</button>
+        <button mat-menu-item>Send to email</button>
+    </mat-menu>
+    <mat-menu #rotateOptions="matMenu">
+        <button mat-menu-item>90&deg;</button>
+        <button mat-menu-item>180&deg;</button>
+        <button mat-menu-item>270&deg;</button>
+    </mat-menu>
+
+    <button id="send-button" mat-button>
+        <img src="assets/images/send32.png" alt="send">
+        Send
+    </button>
+</div>
+
+<div class="content">
+    <app-fields-table #table [fields]="fields"></app-fields-table>
+</div>
+
+<div class="footbar mat-elevation-z4">
+    <button mat-button (click)="onVerifyClick()">
+        <img src="assets/images/preview24.png" alt="verify">
+        Preview
+    </button>
+    <button mat-button (click)="onVerifyClick()">
+        <img src="assets/images/verify24.png" alt="verify">
+        Verify
+    </button>
+</div>

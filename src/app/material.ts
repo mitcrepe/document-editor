@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -8,14 +9,16 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatCheckboxModule, 
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatMenuModule
   ],
   exports: [
     MatButtonModule,
     MatCheckboxModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatMenuModule
   ],
 })
 export class MaterialModule { }

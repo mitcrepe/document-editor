@@ -1,7 +1,12 @@
 table {
-  font-size: 12px;
+  font-size: 13px;
   border-spacing: 0px;
   text-align: left;
+
+  .header {
+    background-color: lightgray;
+    height: 40px;
+  }
 
   tr {    
     .state-column {
