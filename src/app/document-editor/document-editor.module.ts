@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DocumentEditorComponent } from './document-editor.component';
 import { FieldTableRowComponent } from './field-table-row/field-table-row.component';
 import { FieldsTableComponent } from './fields-table/fields-table.component';
-import { MaterialModule } from '../material'
+import { MaterialModule } from '../material';
+import { ImageComponent } from './image/image.component'
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { MaterialModule } from '../material'
   declarations: [
     DocumentEditorComponent,
     FieldTableRowComponent,
-    FieldsTableComponent
+    FieldsTableComponent,
+    ImageComponent
   ],
   exports: [
     DocumentEditorComponent

@@ -14,22 +14,25 @@
     </mat-menu>
 
     <button id="send-button" mat-button>
-        <img src="assets/images/send32.png" alt="send">
+        <img src="assets/img/send32.png" alt="send">
         Send
     </button>
 </div>
 
-<div class="content">
+<div class="content" *ngIf="!imageView">
     <app-fields-table #table [fields]="fields"></app-fields-table>
+</div>
+<div class="content" *ngIf="imageView">
+    <app-image></app-image>
 </div>
 
 <div class="footbar mat-elevation-z4">
-    <button mat-button (click)="onVerifyClick()">
-        <img src="assets/images/preview24.png" alt="verify">
+    <button mat-button (click)="onPreviewClick()" id="preview-btn">
+        <img src="assets/img/preview24.png" alt="verify">
         Preview
     </button>
     <button mat-button (click)="onVerifyClick()">
-        <img src="assets/images/verify24.png" alt="verify">
+        <img src="assets/img/verify24.png" alt="verify">
         Verify
     </button>
 </div>
